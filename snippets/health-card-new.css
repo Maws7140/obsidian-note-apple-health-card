@@ -1,0 +1,327 @@
+/*
+APPLE HEALTH STYLE DATACORE CARD
+
+HOW TO EDIT LATER
+- .ah-card controls the main white card
+- .ah-ring-* controls ring colors and thickness
+- .ah-chart-* controls the heart rate chart
+- .ah-bottom-* controls the three summary stats
+*/
+
+.ah-card {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 28px 24px 30px;
+  border-radius: 38px;
+  background: #f5f5f7;
+  color: #1c1c1e;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, sans-serif;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.ah-header {
+  margin-bottom: 18px;
+}
+
+.ah-title {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+}
+
+.ah-subtitle {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #4b4b50;
+  max-width: 520px;
+}
+
+.ah-rings-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 26px 0 20px;
+}
+
+.ah-rings {
+  position: relative;
+  width: 420px;
+  height: 420px;
+}
+
+.ah-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform: rotate(-90deg);
+  background: conic-gradient(
+    var(--ring-color) 0deg var(--deg),
+    var(--ring-track) var(--deg) 360deg
+  );
+}
+
+.ah-ring::after {
+  content: "";
+  position: absolute;
+  inset: var(--thickness);
+  border-radius: 50%;
+  background: #f5f5f7;
+}
+
+.ah-ring-move {
+  --ring-color: #ff2968;
+  --ring-track: #f8d7e1;
+  --thickness: 42px;
+}
+
+.ah-ring-exercise {
+  inset: 36px;
+  --ring-color: #9be23c;
+  --ring-track: #e5f0d2;
+  --thickness: 34px;
+}
+
+.ah-ring-stand {
+  inset: 70px;
+  --ring-color: #35d6df;
+  --ring-track: #d6eff1;
+  --thickness: 32px;
+}
+
+.ah-ring-center {
+  position: absolute;
+  inset: 120px;
+  border-radius: 50%;
+  background: #f5f5f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  z-index: 2;
+}
+
+.ah-center-stat {
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.ah-center-move {
+  color: #ff2968;
+  font-size: 1.05rem;
+}
+
+.ah-center-exercise {
+  color: #8edb2d;
+  font-size: 0.95rem;
+}
+
+.ah-center-stand {
+  color: #35d6df;
+  font-size: 0.95rem;
+}
+
+.ah-metric-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 12px 0 28px;
+  text-align: center;
+}
+
+.ah-metric-value {
+  font-size: 3.2rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  margin-bottom: 8px;
+}
+
+.ah-metric-label {
+  font-size: 0.9rem;
+  color: #6d6d72;
+  letter-spacing: 0.12em;
+}
+
+.ah-move-text {
+  color: #ff2968;
+}
+
+.ah-exercise-text {
+  color: #8edb2d;
+}
+
+.ah-stand-text {
+  color: #35d6df;
+}
+
+.ah-chart-section {
+  margin-top: 8px;
+}
+
+.ah-chart-box {
+  position: relative;
+  height: 360px;
+  padding: 10px 10px 0;
+}
+
+.ah-grid-lines {
+  position: absolute;
+  inset: 8px 0 52px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.ah-grid-line {
+  border-top: 1px solid rgba(28, 28, 30, 0.08);
+}
+
+.ah-resting-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed rgba(88, 138, 226, 0.35);
+  z-index: 1;
+}
+
+.ah-resting-line span {
+  position: absolute;
+  left: 8px;
+  top: -18px;
+  font-size: 0.88rem;
+  color: #5b88e0;
+  background: #f5f5f7;
+  padding: 0 6px;
+}
+
+.ah-chart-columns {
+  position: absolute;
+  inset: 0 0 52px 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+  align-items: end;
+  z-index: 2;
+}
+
+.ah-chart-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  height: 100%;
+}
+
+.ah-chart-plot {
+  position: relative;
+  width: 100%;
+  flex: 1;
+}
+
+.ah-range-bar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  min-height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ff463d 0%, #ff736b 100%);
+  box-shadow: 0 4px 10px rgba(255, 70, 61, 0.25);
+}
+
+.ah-range-dot {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #111;
+  border: 2px solid #ffb2ac;
+}
+
+.ah-chart-date {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: #8a8a91;
+}
+
+.ah-bottom-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.ah-bottom-value {
+  font-size: 2.8rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  margin-bottom: 8px;
+}
+
+.ah-bottom-label {
+  font-size: 0.9rem;
+  color: #5f5f66;
+  letter-spacing: 0.1em;
+}
+
+.ah-low-text {
+  color: #4d8cff;
+}
+
+.ah-avg-text,
+.ah-high-text {
+  color: #ff4d46;
+}
+
+@media (max-width: 700px) {
+  .ah-card {
+    padding: 22px 16px 24px;
+    border-radius: 28px;
+  }
+
+  .ah-rings {
+    width: 320px;
+    height: 320px;
+  }
+
+  .ah-ring-move {
+    --thickness: 34px;
+  }
+
+  .ah-ring-exercise {
+    inset: 28px;
+    --thickness: 28px;
+  }
+
+  .ah-ring-stand {
+    inset: 54px;
+    --thickness: 26px;
+  }
+
+  .ah-ring-center {
+    inset: 92px;
+  }
+
+  .ah-metric-value {
+    font-size: 2.4rem;
+  }
+
+  .ah-bottom-value {
+    font-size: 2.2rem;
+  }
+
+  .ah-chart-box {
+    height: 300px;
+  }
+
+  .ah-range-bar {
+    width: 16px;
+  }
+}
